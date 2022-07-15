@@ -9,13 +9,17 @@ import com.vunh.recycler_hilt.utils.Constant
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideAppDatabase(appContext: Context) : AppDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context) : AppDatabase {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java,

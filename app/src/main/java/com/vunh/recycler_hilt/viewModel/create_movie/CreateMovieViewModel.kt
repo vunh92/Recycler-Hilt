@@ -1,4 +1,4 @@
-package com.vunh.recycler_hilt.viewmodel.create_movie
+package com.vunh.recycler_hilt.viewModel.create_movie
 
 import android.app.Activity
 import androidx.lifecycle.MutableLiveData
@@ -7,11 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.vunh.recycler_hilt.model.Movie
 import com.vunh.recycler_hilt.repository.RecyclerRepositoryImpl
 import com.vunh.recycler_hilt.usecase.UseCaseResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.io.IOException
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class CreateMovieViewModel (
+@HiltViewModel
+class CreateMovieViewModel @Inject constructor(
     private val recyclerRepositoryImpl: RecyclerRepositoryImpl
     ) : ViewModel() , CoroutineScope {
     private val job = Job()

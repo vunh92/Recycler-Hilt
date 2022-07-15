@@ -1,4 +1,4 @@
-package com.vunh.recycler_hilt.viewmodel.recycler_view
+package com.vunh.recycler_hilt.viewModel.recycler_view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,11 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.vunh.recycler_hilt.model.Movie
 import com.vunh.recycler_hilt.repository.RecyclerRepositoryImpl
 import com.vunh.recycler_hilt.usecase.UseCaseResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.io.IOException
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class RecyclerViewModel (
+@HiltViewModel
+class RecyclerViewModel @Inject constructor(
     private val recyclerRepositoryImpl: RecyclerRepositoryImpl
     ) : ViewModel() , CoroutineScope {
     private val job = Job()

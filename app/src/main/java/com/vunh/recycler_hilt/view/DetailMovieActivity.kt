@@ -3,6 +3,7 @@ package com.vunh.recycler_hilt.view
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,23 +13,22 @@ import com.vunh.recycler_hilt.BaseApp
 //import com.vunh.recycler_hilt.BaseApp
 import com.vunh.recycler_hilt.databinding.ActivityDetailMovieBinding
 import com.vunh.recycler_hilt.model.Movie
-import com.vunh.recycler_hilt.viewmodel.detail_movie.DetailMovieViewModel
-import com.vunh.recycler_hilt.viewmodel.detail_movie.DetailMovieViewModelFactory
+import com.vunh.recycler_hilt.viewModel.detail_movie.DetailMovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailMovieActivity : AppCompatActivity() {
     private lateinit var detailMovieBinding: ActivityDetailMovieBinding
-    lateinit var viewModel: DetailMovieViewModel
-    @Inject
-    lateinit var viewModelFactory: DetailMovieViewModelFactory
+    private val viewModel: DetailMovieViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as BaseApp).appComponent.inject(this)
+//        (application as BaseApp).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         detailMovieBinding = ActivityDetailMovieBinding.inflate(layoutInflater)
         setContentView(detailMovieBinding.root)
 //        viewModelFactory = DetailMovieViewModelFactory(BaseApp.baseApp!!.recyclerRepositoryImpl)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailMovieViewModel::class.java)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(DetailMovieViewModel::class.java)
 
         initializeView()
         initializeViewModel()

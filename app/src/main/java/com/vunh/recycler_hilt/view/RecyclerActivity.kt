@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,24 +15,23 @@ import com.vunh.recycler_hilt.adapter.RecyclerAdapter
 import com.vunh.recycler_hilt.databinding.ActivityRecyclerBinding
 import com.vunh.recycler_hilt.model.Movie
 import com.vunh.recycler_hilt.repository.RecyclerRepositoryImpl
-import com.vunh.recycler_hilt.viewmodel.recycler_view.RecyclerViewModel
-import com.vunh.recycler_hilt.viewmodel.recycler_view.RecyclerViewModelFactory
+import com.vunh.recycler_hilt.viewModel.recycler_view.RecyclerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class RecyclerActivity : AppCompatActivity() {
     private lateinit var recyclerBinding: ActivityRecyclerBinding
-    lateinit var viewModel: RecyclerViewModel
-    @Inject
-    lateinit var viewModelFactory: RecyclerViewModelFactory
+    private val viewModel: RecyclerViewModel by viewModels()
     lateinit var recyclerAdapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as BaseApp).appComponent.inject(this)
+//        (application as BaseApp).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         recyclerBinding = ActivityRecyclerBinding.inflate(layoutInflater)
         setContentView(recyclerBinding.root)
 //        viewModelFactory = RecyclerViewModelFactory(baseApp!!.recyclerRepositoryImpl)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(RecyclerViewModel::class.java)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(RecyclerViewModel::class.java)
 
         setupRecyclerView()
         initializeView()

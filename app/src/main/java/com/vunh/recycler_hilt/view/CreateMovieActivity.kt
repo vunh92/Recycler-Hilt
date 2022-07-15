@@ -4,22 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import com.vunh.recycler_hilt.BaseApp
 //import com.vunh.recycler_hilt.BaseApp.Companion.baseApp
 import com.vunh.recycler_hilt.databinding.ActivityCreateMovieBinding
 import com.vunh.recycler_hilt.model.Movie
-import com.vunh.recycler_hilt.viewmodel.create_movie.CreateMovieViewModel
-import com.vunh.recycler_hilt.viewmodel.create_movie.CreateMovieViewModelFactory
+import com.vunh.recycler_hilt.viewModel.create_movie.CreateMovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CreateMovieActivity : AppCompatActivity() {
     private lateinit var createMovieBinding: ActivityCreateMovieBinding
-    lateinit var viewModel: CreateMovieViewModel
-    @Inject
-    lateinit var viewModelFactory: CreateMovieViewModelFactory
+    private val viewModel: CreateMovieViewModel by viewModels()
     var isUpdate = false
     var baseMovie = Movie(
         "",
@@ -30,12 +29,12 @@ class CreateMovieActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as BaseApp).appComponent.inject(this)
+//        (application as BaseApp).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         createMovieBinding = ActivityCreateMovieBinding.inflate(layoutInflater)
         setContentView(createMovieBinding.root)
 //        viewModelFactory = CreateMovieViewModelFactory(baseApp!!.recyclerRepositoryImpl)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateMovieViewModel::class.java)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateMovieViewModel::class.java)
 
         initializeView()
         initializeViewModel()
